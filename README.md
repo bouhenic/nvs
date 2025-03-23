@@ -58,9 +58,7 @@ SecureStorage storage;
 
 void setup() {
   Serial.begin(115200);
-  WiFi.begin("SSID", "PASSWORD");
-  delay(2000);
-
+  
   // Stocker un secret
   if(storage.storeSecret("wifi_pass", "SuperSecretWiFi")){
     Serial.println("Mot de passe stocké avec succès!");

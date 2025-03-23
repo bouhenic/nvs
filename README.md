@@ -29,6 +29,62 @@ Ce module propose une solution de chiffrement personnalisée qui vient compléte
 
 **Recommandation :** Utilisez `SecureStorage` pour gérer manuellement les secrets sensibles, en évitant de les exposer dans le firmware ou via le stockage NVS implicite d’ESP-IDF.
 
+---
+
+## 🚀 Fonctionnalités
+
+- Stockage sécurisé des secrets dans la mémoire NVS.
+- Chiffrement AES-GCM avec clé dérivée à partir de l'adresse MAC.
+- Utilisation simplifiée grâce à une interface claire et intuitive.
+
+---
+
+## 📂 Installation
+
+Placez simplement le fichier `SecureStorage.h` dans le dossier de votre projet Arduino :
+
+```
+VotreProjet/
+├── VotreProjet.ino
+└── SecureStorage.h
+```
+
+## ⚡️ Exemple d'utilisation
+```
+#include <WiFi.h>
+#include "SecureStorage.h"
+
+SecureStorage storage;
+
+void setup() {
+  Serial.begin(115200);
+  WiFi.begin("SSID", "PASSWORD");
+  delay(2000);
+
+  // Stocker un secret
+  if(storage.storeSecret("wifi_pass", "SuperSecretWiFi")){
+    Serial.println("Mot de passe stocké avec succès!");
+  }
+
+  // Récupérer un secret
+  char secret[64];
+  if(storage.retrieveSecret("wifi_pass", secret, sizeof(secret))){
+    Serial.print("Mot de passe récupéré : ");
+    Serial.println(secret);
+  }
+}
+
+void loop() {}
+```
+
+---
+
+## 🔐 Sécurité
+
+- Clé dérivée automatiquement de l'adresse MAC de l'ESP32.
+- Chiffrement AES-GCM avec authentification (tag de vérification).
+- Effacement sécurisé des données sensibles en mémoire après utilisation.
+
 
 
 

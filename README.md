@@ -85,6 +85,35 @@ void loop() {}
 - Chiffrement AES-GCM avec authentification (tag de vérification).
 - Effacement sécurisé des données sensibles en mémoire après utilisation.
 
+---
+
+🚩 Comment effacer complètement les anciens secrets Wi-Fi non chiffrés ?
+
+Nous devons effacer le namespace Wi-Fi comme ceci :
+
+```
+#include <nvs_flash.h>
+
+void setup() {
+  Serial.begin(115200);
+  delay(1000);
+  
+  Serial.println("Effacement complet des informations Wi-Fi en NVS...");
+  
+  // Effacement complet des infos Wi-Fi
+  nvs_flash_init();
+  nvs_flash_erase();  // Efface complètement la partition NVS
+  nvs_flash_init();   // Re-initialise la partition NVS après effacement
+  
+  Serial.println("Toutes les informations Wi-Fi en NVS ont été effacées.");
+}
+
+void loop() {
+  // Rien à faire ici
+}
+```
+
+
 
 
 

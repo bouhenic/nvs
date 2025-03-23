@@ -87,7 +87,7 @@ void loop() {}
 
 ---
 
-🚩 Comment effacer complètement les anciens secrets Wi-Fi non chiffrés ?
+### 🚩 Comment effacer complètement les anciens secrets Wi-Fi non chiffrés ?
 
 Nous devons effacer le namespace Wi-Fi comme ceci :
 
@@ -112,6 +112,9 @@ void loop() {
   // Rien à faire ici
 }
 ```
+### ⚠️ Important :
+- La commande nvs_flash_erase() efface toute la partition NVS. Cela supprime donc absolument tout, y compris les paramètres Wi-Fi, tes données perso, et toutes les configurations.
+- Après avoir exécuté ce code, toutes les données anciennes disparaîtront complètement.
 
 
 

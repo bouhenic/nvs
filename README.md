@@ -6,16 +6,6 @@
 
 ## 🧱 Partitionnement et justification du projet
 
-Par défaut, l'ESP32 stocke les identifiants Wi-Fi dans la mémoire NVS sans chiffrement, ce qui peut poser un problème de sécurité en cas d'accès physique à la mémoire flash.
-
-Ce module propose une solution de chiffrement personnalisée qui vient compléter cette gestion implicite du Wi-Fi :
-
-- Il permet de stocker **tout type de secret**, et pas seulement les identifiants Wi-Fi.
-- Il chiffre ces données avec une clé dérivée de l'adresse MAC de l'appareil.
-- Il donne à l'utilisateur un **contrôle explicite** sur le processus de chiffrement/déchiffrement, contrairement au stockage automatique du Wi-Fi.
-
-**Recommandation :** Utilisez `SecureStorage` pour gérer manuellement les secrets sensibles, en évitant de les exposer dans le firmware ou via le stockage NVS implicite d’ESP-IDF.
-
 ### 📋 Exemple de partitionnement par défaut (ESP32)
 
 Voici un aperçu des partitions typiquement utilisées dans une configuration OTA :
@@ -28,5 +18,17 @@ Voici un aperçu des partitions typiquement utilisées dans une configuration OT
 | app1      | APP    | OTA_1 (17)     | 0x150000  | 0x140000   | Deuxième image firmware  |
 | spiffs    | DATA   | SPIFFS (130)   | 0x290000  | 0x160000   | Système de fichiers      |
 | coredump  | DATA   | UNKNOWN (3)    | 0x3F0000  | 0x10000    | Dump en cas de crash     |
+
+Par défaut, l'ESP32 stocke les identifiants Wi-Fi dans la mémoire NVS sans chiffrement, ce qui peut poser un problème de sécurité en cas d'accès physique à la mémoire flash.
+
+Ce module propose une solution de chiffrement personnalisée qui vient compléter cette gestion implicite du Wi-Fi :
+
+- Il permet de stocker **tout type de secret**, et pas seulement les identifiants Wi-Fi.
+- Il chiffre ces données avec une clé dérivée de l'adresse MAC de l'appareil.
+- Il donne à l'utilisateur un **contrôle explicite** sur le processus de chiffrement/déchiffrement, contrairement au stockage automatique du Wi-Fi.
+
+**Recommandation :** Utilisez `SecureStorage` pour gérer manuellement les secrets sensibles, en évitant de les exposer dans le firmware ou via le stockage NVS implicite d’ESP-IDF.
+
+
 
 
